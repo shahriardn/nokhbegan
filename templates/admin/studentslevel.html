@@ -1,0 +1,39 @@
+{% extends "admin/index.html" %}
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">تعیین سطح </li>
+    </ol>
+</nav>
+<div class='container-fluid'>
+    <h4> در انتظار تعیین سطح...</h4>
+    <p>افرادی که در سایت ثبت نام کرده اند ولی هنوز آزمون تعیین سطح را نگذرانده اند.</p>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>نام</th>
+                <th>نام خانوادگی</th>
+                <th>شماره تماس</th>
+                <th>مقطع</th>
+                <th>عملیات</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in content.user %}
+            <tr>
+
+                <td>{{user.1}}</td>
+                <td>{{user.2}}</td>
+                <td>{{user.4}}</td>
+                <td>{{user.3}}</td>
+                <td>
+                    <button type="button" class="btn btn-success">تعیین شد</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+{% endblock content %}
