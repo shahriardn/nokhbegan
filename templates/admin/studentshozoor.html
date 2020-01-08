@@ -1,0 +1,123 @@
+{% extends "admin/index.html" %}
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">دوره های آموزشی</li>
+  </ol>
+
+</nav>
+<div class='container-fluid'>
+  <h2> دوره های در حال برگزاری...</h2>
+  <div class='callout callout-warning'>
+    <h3>
+      تاریخ امروز
+      <strong> دوشنبه 13 مرداد 1398</strong>
+    </h3>
+  </div>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>عنوان دوره </th>
+        <th>سطح </th>
+        <th>تعداد نفرات تا این لحظه</th>
+        <th> تاریخ شروع دوره</th>
+        <th>عملیات</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for doreh in content.doreh %}
+      <tr>
+        <td>{{doreh.1}}</td>
+        <td>{{doreh.2}}</td>
+        <td>3</td>
+        <td>{{doreh.3}}</td>
+        <td>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnewuser">لیست حضور و غیاب
+            جدید</button>
+          <!-- Modal -->
+          <div class="modal fade" id="addnewuser" tabindex="-1" role="dialog" aria-labelledby="addnewuserTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addnewuserLongTitle">
+                    در حال ثبت لیست حاضرین دوره
+                    <strong>ریاضی هفتم</strong><br />
+                    در جلسه
+                    <strong>۶ </strong>
+                    می باشد.
+                  </h5>
+                  <p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </p>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputAddress">جستجو...</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder=" نام دانش آموز">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputAddress"></label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="کد ملی">
+                      </div>
+                    </div>
+
+
+                    <div class="form-group">
+                      <table class="table table-striped">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th>نام</th>
+                            <th>نام خانوادگی</th>
+                            <th>شماره تماس</th>
+                            <th>مقطع</th>
+                            <th>حاضر</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for user in content.user %}
+                          <tr>
+
+                            <td>{{user.1}}</td>
+                            <td>{{user.2}}</td>
+                            <td>{{user.4}}</td>
+                            <td>{{user.3}}</td>
+                            <td>
+                              <label class="checkbox checkbox-primary">
+                                <input type="checkbox">
+                                <span class="check-mark"></span>
+                                حاضر
+                              </label>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="form-group callout-warning callout">
+                      <label for="inputAddress">
+                        تعداد جلسات برگزار شده در دوره تا این لحظه
+                        <strong>5</strong>
+                        جلسه می باشد.
+                      </label>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+                  <button type="button" class="btn btn-primary"> ثبت</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}

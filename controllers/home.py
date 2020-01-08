@@ -51,3 +51,11 @@ class home_admin:
             'doreh': conadmin().select('doreh')
         }
         return render_template('admin/dorehwaiting.html', content=content)
+    # تابع نمایش صفحه حضور و غیاب که به اطلاعات کاربر و دوره همزمان نیاز دارد
+    def studenthozoor():
+        # اطلاعات کاربرانی که در سایت ثبت نام کرده اند ولی تعیین سطح نشده اند
+        content = {
+            'user': conadmin().select('user'),
+            'doreh': conadmin().select('doreh')
+        }
+        return render_template('admin/studentshozoor.html', content=content)

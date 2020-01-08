@@ -23,6 +23,12 @@ def register():
 def home_admin():
     return admin.show_admin()
 
+# صفحه سامانه حضور و غیاب  دانش آموزان
+@app.route("/admin/students/hozoor")
+def studentshozoor():
+    return admin.studenthozoor()
+
+
 # صفحه تعیین سطح دانش آموزان
 @app.route("/admin/students/level")
 def studentslevel():
