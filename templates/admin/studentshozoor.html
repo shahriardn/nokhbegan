@@ -114,6 +114,40 @@
               </div>
             </div>
           </div>
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#queryhozoor">گزارش</button>
+          <div class="modal fade" id="queryhozoor" tabindex="-1" role="dialog" aria-labelledby="queryhozoorTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="queryhozoorLongTitle">
+                    در حال ثبت لیست حاضرین دوره
+                    <strong>ریاضی هفتم</strong><br />
+                    در جلسه
+                    <strong>۶ </strong>
+                    می باشد.
+                  </h5>
+                  <p>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </p>
+                </div>
+                <div class="modal-body">
+                  <form>
+                  <canvas id="barChart"></canvas>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+                  <button type="button" class="btn btn-primary"> ثبت</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span class="min-chart" id="chart-sales" data-percent="56">
+            <span class="percent"></span>
+          </span>
         </td>
       </tr>
       {% endfor %}
