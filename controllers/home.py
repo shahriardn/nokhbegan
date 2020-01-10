@@ -55,7 +55,7 @@ class home_admin:
     def studenthozoor():
         # اطلاعات کاربرانی که در سایت ثبت نام کرده اند ولی تعیین سطح نشده اند
         content = {
-            'user': conadmin().select('user'),
-            'doreh': conadmin().select('doreh')
+            'user': conadmin().select('user').orderby('name').fetchall(),
+            'doreh': conadmin().select('doreh').fetchall()
         }
         return render_template('admin/studentshozoor.html', content=content)
