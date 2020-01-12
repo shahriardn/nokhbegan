@@ -67,3 +67,7 @@ class home_admin:
             'doreh': conadmin().select('*','doreh').fetchall()
         }
         return render_template('admin/studentshozoor.html', content=content)
+    # تابع اضافه کردن یک دوره جدید
+    def addnewdoreh(data):
+        # conadmin.insertinto('doreh',)
+        return render_template('admin/test.html', content=data.keys())

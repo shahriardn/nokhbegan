@@ -1,4 +1,5 @@
 from flask import *
+from flask import request, jsonify
 from controllers.home import home as show
 from controllers.home import home_admin as admin
 app = Flask(__name__)
@@ -43,6 +44,14 @@ def doreh():
 def dorehwaiting():
     return admin.dorehwaiting()
 
+
+@app.route("/admin/doreh/addnewdoreh", methods=['POST'])
+def addnewdoreh():
+    # data = request.get
+    data = request.form.to_dict()
+    
+    # data="sss"
+    return admin.addnewdoreh(data=data)
 
 if __name__ == "__main__":
     app.run()

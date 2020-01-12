@@ -33,4 +33,7 @@ class admin():
         self.query += " ORDER BY {table}.{field} ASC".format(
             table=self.table, field=field)
         return self
+    def insertinto(self, table, columns, values):
+        self.query = "insert into {tbl} ( {columns} ) values ( {values} )"
+        return self
     
