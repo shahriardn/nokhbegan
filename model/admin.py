@@ -17,7 +17,8 @@ class admin():
         self.query = "select * from {table}".format(table=table)
         self.table = table
         return self
-    
+    def where(self, statement):
+        self.query += "where {state}"
     def orderby(self, field):
         self.query += " ORDER BY {table}.{field} ASC".format(
             table=self.table, field=field)
