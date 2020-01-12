@@ -1,5 +1,5 @@
 from flask import *
-from flask import request, jsonify
+from flask import request
 from controllers.home import home as show
 from controllers.home import home_admin as admin
 app = Flask(__name__)
@@ -47,11 +47,11 @@ def dorehwaiting():
 
 @app.route("/admin/doreh/addnewdoreh", methods=['POST'])
 def addnewdoreh():
-    # data = request.get
     data = request.form.to_dict()
-    
-    # data="sss"
-    return admin.addnewdoreh(data=data)
+    if admin.addnewdoreh(data=data) == True:
+        return redirect('/admin/doreh/dorehwaiting')
+    else:
+        return render_template('admin/test.html', content=result)
 
 if __name__ == "__main__":
     app.run()

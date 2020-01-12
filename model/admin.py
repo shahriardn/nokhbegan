@@ -6,9 +6,10 @@ class admin():
     query = ''
     table = ''
     cur = ''
+    constr = ''
     def __init__(self):
-        constr = sqlite3.connect('meta.db')
-        cur = constr.cursor()
+        self.constr = sqlite3.connect('meta.db')
+        cur = self.constr.cursor()
         self.cur = cur
     def fetchall(self):
         result = self.cur.execute(self.query)
@@ -29,11 +30,21 @@ class admin():
     def where(self, statement):
         self.query += "where {state}".format(state=statement)
         return self
-    def orderby(self, field):
-        self.query += " ORDER BY {table}.{field} ASC".format(
-            table=self.table, field=field)
+
+    def orderby(self, field, DESCorASC):
+        self.query += " ORDER BY {table}.{field} {ASC}".format(
+            table=self.table,
+            field=field,
+            ASC=DESCorASC)
         return self
+
     def insertinto(self, table, columns, values):
-        self.query = "insert into {tbl} ( {columns} ) values ( {values} )"
-        return self
+        self.query = "insert into {tbl}  {columns}  values  {values} ".format(
+            tbl=table,
+            columns=columns,
+            values=values
+        )
+        self.cur.execute(self.query)
+        return self.constr.commit()
+         
     
