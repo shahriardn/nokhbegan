@@ -41,7 +41,15 @@ class home_admin:
     def studentlevel():
         # اطلاعات کاربرانی که در سایت ثبت نام کرده اند ولی تعیین سطح نشده اند
         content = {
-            'user': conadmin().select('user').fetchall()
+            'user': conadmin().select("""
+                                      user."melli-code",
+                                      user.name,
+                                      user.fname,
+                                      user.grade,
+                                      user.tel,
+                                      user.address,
+                                      level.mellicode
+            """, 'user').joinit('LEFT', 'level', ' level.mellicode = user."melli-code"').where(' level.mellicode IS NULL').fetchall()
         }
         return render_template('admin/studentslevel.html', content=content)
     # تابع نمایش دوره های در انتظار تکمل
