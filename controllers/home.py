@@ -78,7 +78,15 @@ class home_admin:
         try:
             conadmin().insertinto('doreh',
                                   tuple([*data]),
-                                  tuple(data.values()))
+                                  tuple(data.values())).runquery()
+            return True
+        except Exception as error:
+            return {"error": error}
+    
+    # تابع حذف کردن یک دوره جدید
+    def deletedoreh(data):
+        try:
+            conadmin().deletefrom('doreh','id={id}'.format(id=data)).runquery()
             return True
         except Exception as error:
             return {"error": error}

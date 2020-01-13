@@ -44,7 +44,7 @@ def doreh():
 def dorehwaiting():
     return admin.dorehwaiting()
 
-
+# فرایند اضافه شدن یک دوره جدید
 @app.route("/admin/doreh/addnewdoreh", methods=['POST'])
 def addnewdoreh():
     data = request.form.to_dict()
@@ -52,6 +52,15 @@ def addnewdoreh():
         return redirect('/admin/doreh/dorehwaiting')
     else:
         return render_template('admin/test.html', content=result)
+
+# فرایند حذف شدن یک دوره جدید
+@app.route("/admin/doreh/deletedoreh/<id>", methods=['get'])
+def deletedoreh(id):
+    if admin.deletedoreh(data=id) == True:
+        return redirect('/admin/doreh/dorehwaiting')
+    else:
+        return render_template('admin/test.html', content=data)
+
 
 if __name__ == "__main__":
     app.run()

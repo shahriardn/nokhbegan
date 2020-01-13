@@ -16,6 +16,10 @@ class admin():
         return result.fetchall()
         # return self.query
 
+    def runquery(self):
+        self.cur.execute(self.query)
+        return self.constr.commit()
+
     def select(self, fields, table):
         self.query = "select {field} from {table}".format(field=fields, table=table)
         self.table = table
@@ -44,7 +48,12 @@ class admin():
             columns=columns,
             values=values
         )
-        self.cur.execute(self.query)
-        return self.constr.commit()
+        return self
+    def deletefrom(self, table, condition):
+        self.query = "DELETE FROM {table_name} WHERE {condition}".format(
+            table_name=table,
+            condition=condition
+        )
+        return self
          
     

@@ -32,7 +32,7 @@
         <td>3</td>
         <td>{{doreh.3}}</td>
         <td>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletedoreh">حذف</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deletedoreh{{doreh.0}}">حذف</button>
           <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editdoreh">ویرایش</button>
           <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addnewuser">اضافه کردن نفر جدید</button>
           <!-- Modal -->
@@ -152,21 +152,23 @@
             </div>
           </div>
           <!-- Modal -->
-          <div class="modal fade" id="deletedoreh" tabindex="-1" role="dialog" aria-labelledby="deletedorehTitle"
+          <div class="modal fade" id="deletedoreh{{doreh.0}}" tabindex="-1" role="dialog" aria-labelledby="deletedorehTitle"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="deletedorehLongTitle">حذف دوره </h5>
+                  <p>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
+                  </p>
                 </div>
                 <div class="modal-body">
-                  <form>
+                  <form action="/admin/doreh/deletedoreh/{{doreh.0}}">
                     <div class="form-group">
-                      <label for="inputAddress"> آیا از حذف دوره
-                        <strong>ریاضی هفتم</strong>
+                      <label for="inputAddress" > آیا از حذف دوره
+                        <strong>{{doreh.1}} </strong>
                         اطمینان دارید؟
                       </label>
                     </div>
@@ -175,7 +177,7 @@
                         <button type="button" class="btn btn-danger" data-dismiss="modal">انصراف</button>
                       </div>
                       <div class="form-group col-md-6">
-                        <button type="button" class="btn btn-success">حذف کن </button>
+                        <button type="submit" formmethod="get" class="btn btn-success"  >حذف کن </button>
                       </div>
                     </div>
                   </form>
