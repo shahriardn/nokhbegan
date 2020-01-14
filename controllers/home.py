@@ -55,9 +55,10 @@ class home_admin:
             """, 'user').joinit('LEFT', 'level', ' level.mellicode = user."melli-code"').where(' level.mellicode IS NULL').fetchall()
         }
         return render_template('admin/studentslevel.html', content=content)
+   
     # تابع نمایش دوره های در انتظار تکمل
-
     def dorehwaiting():
+
         content = {
             'user': conadmin().select('*', 'user').fetchall(),
             'doreh': conadmin().select('*', 'doreh').orderby('id', 'DESC').fetchall()
@@ -90,3 +91,11 @@ class home_admin:
             return True
         except Exception as error:
             return {"error": error}
+
+    # تابع ویرایش یک دوره
+    def updatedoreh(data):
+        try:
+            conadmin().updateit('doreh', data['newdata'], "id={id}".format(id=data['condition']))
+        except Exception as error:
+            return {"error": error}
+    

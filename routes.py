@@ -47,8 +47,7 @@ def dorehwaiting():
 # فرایند اضافه شدن یک دوره جدید
 @app.route("/admin/doreh/addnewdoreh", methods=['POST'])
 def addnewdoreh():
-    data = request.form.to_dict()
-    if admin.addnewdoreh(data=data) == True:
+    if admin.addnewdoreh(data=request.form.to_dict()) == True:
         return redirect('/admin/doreh/dorehwaiting')
     else:
         return render_template('admin/test.html', content=result)
@@ -61,6 +60,27 @@ def deletedoreh(id):
     else:
         return render_template('admin/test.html', content=data)
 
+# فرایند ویرایش  یک دوره 
+@app.route("/admin/doreh/updatedoreh/<id>", methods=['POST'])
+def updatedoreh(id):
+    datadic = request.form.to_dict()
+    newdata = "".join(
+                " {key} = {value} ".format(key=key,value=value) 
+                for key, value in datadic.items()
+                )
+    query = "UPDATE {table_name} SET {newdata} WHERE {condition}".format(
+        table_name="table",
+        newdata=newdata,
+        condition="condition"
+    )
+    data ={ 
+        'condition': id,
+        'newdata': query
+    }
+    # if admin.updatedoreh(data=data) == True:
+    #     return redirect('/admin/doreh/dorehwaiting')
+    # else:
+    return render_template('admin/test.html', content=data)
 
 if __name__ == "__main__":
     app.run()

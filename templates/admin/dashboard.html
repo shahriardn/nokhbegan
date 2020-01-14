@@ -1,63 +1,65 @@
 {% extends "admin/index.html" %}
 {% block content %}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">آموزشگاه</li>
-  </ol>
-</nav>
-<div class='container-fluid'>
-  <h4> در انتظار تعیین سطح...</h4>
-  <p>افرادی که در سایت ثبت نام کرده اند ولی هنوز آزمون تعیین سطح را نگذرانده اند.</p>
-  <table class="table table-striped">
-    <thead class="thead-dark">
-      <tr>
-        <th>نام</th>
-        <th>نام خانوادگی</th>
-        <th>شماره تماس</th>
-        <th>مقطع</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for user in content.user %}
-      <tr>
+<div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">آموزشگاه</li>
+    </ol>
+  </nav>
+  <div class='container-fluid'>
+    <h4> در انتظار تعیین سطح...</h4>
+    <p>افرادی که در سایت ثبت نام کرده اند ولی هنوز آزمون تعیین سطح را نگذرانده اند.</p>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>نام</th>
+          <th>نام خانوادگی</th>
+          <th>شماره تماس</th>
+          <th>مقطع</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in content.user %}
+        <tr>
 
-        <td>{{user.1}}</td>
-        <td>{{user.2}}</td>
-        <td>{{user.4}}</td>
-        <td>{{user.3}}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <div class="callout callout-warning">
-    <h4>کلاس های هفت روز آیند</h4>
-    <p> <strong> </strong>
-      <table class="table">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">عنوان دوره </th>
-            <th scope="col">مقطع</th>
-            <th scope="col">تاریخ و ساعت</th>
-            <th scope="col"> جلسات برگزاری </th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for class in content.doreh %}
-          <tr>
-            <th scope="row">{{class.0}}</th>
-            <td>{{class.1}}</td>
-            <td>{{class.2}}</td>
-            <td>{{class.3}}</td>
-            <td>{{class.4}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </p>
+          <td>{{user.1}}</td>
+          <td>{{user.2}}</td>
+          <td>{{user.4}}</td>
+          <td>{{user.3}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="callout callout-warning">
+      <h4>کلاس های هفت روز آیند</h4> 
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">عنوان دوره </th>
+              <th scope="col">مقطع</th>
+              <th scope="col">تاریخ و ساعت</th>
+              
+                      <!-- <th scope="col"> جلسات برگزاری </th> -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for class in content.doreh %}
+            <tr>
+              <th scope="row">{{class.0}}</th>
+              <td>{{class.1}}</td>
+              <td>{{class.2}}</td>
+              <td>{{class.3}}</td>
+              
+              <!-- <td>{{class.4}}</td> -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+    </div>
+
   </div>
-
 </div>
-
 
 {% endblock content %}

@@ -13,7 +13,6 @@
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newdoreh">
           ثبت دوره جدید
         </button>
-        <button class="btn btn-primary btn-round">Round</button>
         <!-- Modal -->
         <div class="modal fade" id="newdoreh" tabindex="-1" role="dialog" aria-labelledby="newdorehTitle"
           aria-hidden="true">
@@ -21,8 +20,10 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="newdorehLongTitle">ثبت دوره جدید</h5>
+                  <p>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+                </p>
+                    <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <form action="/admin/doreh/addnewdoreh" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
@@ -30,7 +31,8 @@
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputAddress">عنوان دوره</label>
-                      <input type="text" name="title" class="form-control" id="inputAddress" placeholder="دوره ریاضی یک ">
+                      <input type="text" name="title" class="form-control" id="inputAddress"
+                        placeholder="دوره ریاضی یک ">
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputAddress">سطح</label>
@@ -44,9 +46,8 @@
 
                   <div class="form-group">
                     <label for="inputAddress">توضیحات</label>
-                    <input type="text" name="description" class="form-control" id="discrib"  placeholder="توضیحات">
+                    <input type="text" name="description" class="form-control" id="discrib" placeholder="توضیحات">
                   </div>
-                  <button type="submit">submit</button>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>

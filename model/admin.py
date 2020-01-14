@@ -55,5 +55,11 @@ class admin():
             condition=condition
         )
         return self
-         
-    
+    def updateit(self, table, datadic, condition):
+        newdata = ["{key} = {value}" for key, value in datadic.items() ]
+        self.query = "UPDATE {table_name} SET {newdata} WHERE {condition}".format(
+            table_name=table,
+            newdata=newdata,
+            condition=condition
+        )
+        return self.query
