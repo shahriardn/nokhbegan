@@ -55,7 +55,7 @@ class home_admin:
             """, 'user').joinit('LEFT', 'level', ' level.mellicode = user."melli-code"').where(' level.mellicode IS NULL').fetchall()
         }
         return render_template('admin/studentslevel.html', content=content)
-   
+
     # تابع نمایش دوره های در انتظار تکمل
     def dorehwaiting():
 
@@ -83,11 +83,12 @@ class home_admin:
             return True
         except Exception as error:
             return {"error": error}
-    
+
     # تابع حذف کردن یک دوره جدید
     def deletedoreh(data):
         try:
-            conadmin().deletefrom('doreh','id={id}'.format(id=data)).runquery()
+            conadmin().deletefrom(
+                'doreh', 'id={id}'.format(id=data)).runquery()
             return True
         except Exception as error:
             return {"error": error}
@@ -95,7 +96,11 @@ class home_admin:
     # تابع ویرایش یک دوره
     def updatedoreh(data):
         try:
-            conadmin().updateit('doreh', data['newdata'], "id={id}".format(id=data['condition']))
+            conadmin().updateit(
+                'doreh',
+                data['newdata'],
+                "id={id}".format(id=data['condition'])
+            ).runquery()
+            return True
         except Exception as error:
             return {"error": error}
-    

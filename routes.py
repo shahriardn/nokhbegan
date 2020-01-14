@@ -4,17 +4,18 @@ from controllers.home import home as show
 from controllers.home import home_admin as admin
 app = Flask(__name__)
 
+
 @app.route("/")
 def home():
     return show.show_index()
 
 
-#render login page
+# render login page
 @app.route("/login/")
 def login():
     return show.login()
 
-#render login register
+# render login register
 @app.route("/register/")
 def register():
     return show.register()
@@ -60,28 +61,19 @@ def deletedoreh(id):
     else:
         return render_template('admin/test.html', content=data)
 
-# فرایند ویرایش  یک دوره 
+# فرایند ویرایش  یک دوره
 @app.route("/admin/doreh/updatedoreh/<id>", methods=['POST'])
 def updatedoreh(id):
-    datadic = request.form.to_dict()
-    newdata = "".join(
-                " {key} = {value} ".format(key=key,value=value) 
-                for key, value in datadic.items()
-                )
-    query = "UPDATE {table_name} SET {newdata} WHERE {condition}".format(
-        table_name="table",
-        newdata=newdata,
-        condition="condition"
-    )
-    data ={ 
+    
+    data = {
         'condition': id,
-        'newdata': query
+        'newdata': request.form.to_dict()
     }
-    # if admin.updatedoreh(data=data) == True:
-    #     return redirect('/admin/doreh/dorehwaiting')
-    # else:
-    return render_template('admin/test.html', content=data)
+    if admin.updatedoreh(data=data) == True:
+        return redirect('/admin/doreh/dorehwaiting')
+    else:
+        return render_template('admin/test.html', content=data)
+
 
 if __name__ == "__main__":
     app.run()
-
