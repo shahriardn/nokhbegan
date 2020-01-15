@@ -5,6 +5,11 @@ from controllers.home import home_admin as admin
 app = Flask(__name__)
 
 
+@app.route("/test")
+def test():
+    return render_template('/admin/test.html')
+
+
 @app.route("/")
 def home():
     return show.show_index()
