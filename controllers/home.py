@@ -1,7 +1,8 @@
 from flask import *
 from flask import request
 from model.admin import admin as conadmin
-
+from controllers.contentgnerator import db as mydb
+from controllers.contentgnerator import date as mydate
 
 class home:
     def show_index():
@@ -17,12 +18,12 @@ class home:
 class home_admin:
     # نمایش صفحه داشبورد
     def show_admin():
-        # data = request.headers.get('Authorization')
-        data = "TOKEN123"
+        data = request.headers.get('Authorization')
+        # data = "TOKEN123"
         # واکشی اطلاعات مورد نیاز صفحه داشبورد
         content = {
-            'user': conadmin().select('*', 'user').fetchall(),
-            'doreh': conadmin().select('*', 'doreh').fetchall()
+            'user': mydb.selectalluser(),
+            'doreh': mydb.selectalldoreh()
         }
         # چک میشود اگر توکن ارسالی توسط کاربری معتبر است یا خیر
         if str(data) == "TOKEN123":
@@ -36,7 +37,7 @@ class home_admin:
     def show_doreh():
         # واکشی اطلاعات ذخیره شده در جدول دوره
         content = {
-            'doreh': conadmin().select('*', 'doreh').fetchall()
+            'doreh': mydb.selectalldoreh()
         }
         return render_template('admin/doreh.html', content=content)
     # تابع نمایش صفحه تعیین سطح دانش آموزانی که تعیین سطح نشده اند
@@ -44,24 +45,16 @@ class home_admin:
     def studentlevel():
         # اطلاعات کاربرانی که در سایت ثبت نام کرده اند ولی تعیین سطح نشده اند
         content = {
-            'user': conadmin().select("""
-                                      user."melli-code",
-                                      user.name,
-                                      user.fname,
-                                      user.grade,
-                                      user.tel,
-                                      user.address,
-                                      level.mellicode
-            """, 'user').joinit('LEFT', 'level', ' level.mellicode = user."melli-code"').where(' level.mellicode IS NULL').fetchall()
+            'user': mydb.selectuserswaitinglevel()
         }
         return render_template('admin/studentslevel.html', content=content)
 
     # تابع نمایش دوره های در انتظار تکمل
     def dorehwaiting():
-
         content = {
-            'user': conadmin().select('*', 'user').fetchall(),
-            'doreh': conadmin().select('*', 'doreh').orderby('id', 'DESC').fetchall()
+            'user': mydb.selectalluser(),
+            'doreh': mydb.selectalldoreh(),
+            'date': mydate.today()
         }
         return render_template('admin/dorehwaiting.html', content=content)
     # تابع نمایش صفحه حضور و غیاب که به اطلاعات کاربر و دوره همزمان نیاز دارد
@@ -69,8 +62,8 @@ class home_admin:
     def studenthozoor():
         # اطلاعات کاربرانی که در سایت ثبت نام کرده اند ولی تعیین سطح نشده اند
         content = {
-            'user': conadmin().select('*', 'user').fetchall(),
-            'doreh': conadmin().select('*', 'doreh').fetchall()
+            'user': mydb.selectalluser(),
+            'doreh': mydb.selectalldoreh()
         }
         return render_template('admin/studentshozoor.html', content=content)
 
