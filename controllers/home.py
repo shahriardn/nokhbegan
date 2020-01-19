@@ -3,7 +3,8 @@ from flask import request
 from model.admin import admin as conadmin
 from controllers.contentgnerator import db as mydb
 from controllers.contentgnerator import date as mydate
-
+from model.admin import User
+from flask_login import login_user, current_user
 class home:
     def show_index():
         return render_template("index.html")
@@ -16,22 +17,30 @@ class home:
 
 
 class home_admin:
+    def loginme(data):
+        try:
+            user = User.query.filter_by(username=data['username']).first()
+            login_user(user)
+            return True
+        except Exception as error:
+            return {"error": error}
     # نمایش صفحه داشبورد
     def show_admin():
-        data = request.headers.get('Authorization')
+        # data = request.headers.get('Authorization')
         # data = "TOKEN123"
         # واکشی اطلاعات مورد نیاز صفحه داشبورد
         content = {
+            'manager': current_user.username,
             'user': mydb.selectalluser(),
             'doreh': mydb.selectalldoreh()
         }
         # چک میشود اگر توکن ارسالی توسط کاربری معتبر است یا خیر
-        if str(data) == "TOKEN123":
-            return render_template('admin/dashboard.html', content=content)
+        # if str(data) == "TOKEN123":
+        return render_template('admin/dashboard.html', content=content)
             # return hello
-        else:
+        # else:
             # اگر توکن معتبر باشد صفحه لود خواهد شد
-            return render_template('login/index.html')
+            # return render_template('login/index.html')
 
     # تابع نمایش دوره های آموزشگاه
     def show_doreh():

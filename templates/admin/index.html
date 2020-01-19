@@ -25,7 +25,7 @@
                 <button type="button" class="btn btn-sidebar" data-dismiss="sidebar"><span class="x"></span></button>
             </div>
             <div class="sidebar-header"><img src="{{ url_for('static', filename='admin//assets/img/john-doe.png') }}" class="user-photo">
-                <p class="username">پیام محمدی
+                <p class="username">{{content.manager}} 
                     <small>مدیر سامانه</small>
                 </p>
             </div>
@@ -76,7 +76,7 @@
                 <a href="static/admin/pages/content/settings.html" data-toggle="tooltip" title="گزینه‌ها">
                     <i class="fa fa-cog"></i>
                 </a>
-                <a href="pages/content/signin.html" data-toggle="tooltip" title="برون‌رفت">
+                <a href="/logmeout" data-toggle="tooltip" title="برون‌رفت">
                     <i class="fa fa-power-off"></i>
                 </a>
             </div>

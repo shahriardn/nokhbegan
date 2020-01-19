@@ -1,16 +1,31 @@
 from flask import *
 import sqlite3
+from flask_login import UserMixin
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 
+
+
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
 
 class admin():
     query = ''
     table = ''
     cur = ''
     constr = ''
+
     def __init__(self):
         self.constr = sqlite3.connect('meta.db')
         cur = self.constr.cursor()
         self.cur = cur
+
     def fetchall(self):
         result = self.cur.execute(self.query)
         return result.fetchall()
@@ -21,16 +36,18 @@ class admin():
         return self.constr.commit()
 
     def select(self, fields, table):
-        self.query = "select {field} from {table}".format(field=fields, table=table)
+        self.query = "select {field} from {table}".format(
+            field=fields, table=table)
         self.table = table
         return self
 
-    def joinit(self , direction, table, statement):
+    def joinit(self, direction, table, statement):
         self.query += " {dir} JOIN {tb} on {state}".format(
             dir=direction,
             tb=table,
             state=statement)
         return self
+
     def where(self, statement):
         self.query += "where {state}".format(state=statement)
         return self
@@ -49,12 +66,14 @@ class admin():
             values=values
         )
         return self
+
     def deletefrom(self, table, condition):
         self.query = "DELETE FROM {table_name} WHERE {condition}".format(
             table_name=table,
             condition=condition
         )
         return self
+
     def updateit(self, table, datadic, condition):
         newdata = " ,  ".join(
             " {key} = '{value}' ".format(key=key, value=value)
