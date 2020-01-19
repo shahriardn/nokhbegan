@@ -46,6 +46,7 @@ class home_admin:
     def show_doreh():
         # واکشی اطلاعات ذخیره شده در جدول دوره
         content = {
+            'manager': current_user.username,
             'doreh': mydb.selectalldoreh()
         }
         return render_template('admin/doreh.html', content=content)
@@ -54,6 +55,7 @@ class home_admin:
     def studentlevel():
         # اطلاعات کاربرانی که در سایت ثبت نام کرده اند ولی تعیین سطح نشده اند
         content = {
+            'manager': current_user.username,
             'user': mydb.selectuserswaitinglevel()
         }
         return render_template('admin/studentslevel.html', content=content)
@@ -61,6 +63,7 @@ class home_admin:
     # تابع نمایش دوره های در انتظار تکمل
     def dorehwaiting():
         content = {
+            'manager': current_user.username,
             'user': mydb.selectalluser(),
             'doreh': mydb.selectalldoreh(),
             'date': mydate.today()
@@ -71,6 +74,7 @@ class home_admin:
     def studenthozoor():
         # اطلاعات کاربرانی که در سایت ثبت نام کرده اند ولی تعیین سطح نشده اند
         content = {
+            'manager': current_user.username,
             'user': mydb.selectalluser(),
             'doreh': mydb.selectalldoreh()
         }
