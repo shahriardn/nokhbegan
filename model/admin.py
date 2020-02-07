@@ -32,8 +32,13 @@ class admin():
         # return self.query
 
     def runquery(self):
-        self.cur.execute(self.query)
-        return self.constr.commit()
+        try:
+            self.cur.execute(self.query)
+            return self.constr.commit()
+        except Exception as error:
+            return {"error": error}
+        
+        # return self.query
 
     def select(self, fields, table):
         self.query = "select {field} from {table}".format(
@@ -49,7 +54,7 @@ class admin():
         return self
 
     def where(self, statement):
-        self.query += "where {state}".format(state=statement)
+        self.query += " where {state}".format(state=statement)
         return self
 
     def orderby(self, field, DESCorASC):

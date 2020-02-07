@@ -7,31 +7,12 @@ from model.admin import User
 from flask_login import login_user, current_user
 from persiantools.jdatetime import JalaliDate
 
-class home:
-
-    def adduser(data):
-        try:
-            conadmin().insertinto('user',
-                                  tuple([*data]),
-                                  tuple(data.values())).runquery()
-            return True
-        except Exception as error:
-            return {"error": error}
-
-    def show_index():
-        return render_template("index.html")
-
-    def login():
-        return render_template("login/index.html")
-
-    def register():
-        return render_template("register/index.html")
-
 
 class home_admin:
     def loginme(data):
         try:
-            user = User.query.filter_by(username=data['username'],password=data['password']).first()
+            user = User.query.filter_by(
+                username=data['username'], password=data['password']).first()
             login_user(user)
             return True
         except Exception as error:
@@ -46,9 +27,9 @@ class home_admin:
             'manager': current_user.username,
             'user': mydb.selectuserswaitinglevel(),
             'doreh': conadmin().select('*', 'doreh').where(
-                    "date > '{todey}'".format(
-                        todey=JalaliDate.today()
-                        )).orderby('id', 'DESC').fetchall()
+                "date > '{todey}'".format(
+                    todey=JalaliDate.today()
+                )).orderby('id', 'DESC').fetchall()
         }
         # چک میشود اگر توکن ارسالی توسط کاربری معتبر است یا خیر
         # if str(data) == "TOKEN123":
@@ -140,15 +121,15 @@ class home_admin:
 
     # تابع اضافه کردن یک کاربر به یک دوره
     def addusertodoreh(data):
-        users = [str(key) for key , value in data.items() if value == 'on']
+        users = [str(key) for key, value in data.items() if value == 'on']
         try:
 
             for item in users:
                 conadmin().insertinto('classregister',
-                                    "(userid,doreh)",
-                                    "({thisitem}, {doreh})".format(
-                                        doreh=data['doreh'],
-                                        thisitem=item)).runquery()
+                                      "(userid,doreh)",
+                                      "({thisitem}, {doreh})".format(
+                                          doreh=data['doreh'],
+                                          thisitem=item)).runquery()
             return True
         except Exception as error:
             return {"error": error}

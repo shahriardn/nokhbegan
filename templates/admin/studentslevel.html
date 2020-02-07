@@ -27,13 +27,81 @@
                 <td>{{user.4}}</td>
                 <td>{{user.3}}</td>
                 <td>
-                    <button type="button" class="btn btn-success">تعیین شد</button>
+                    <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#userlevel{{user.0}}">تعیین شد</button>
                 </td>
             </tr>
+            <!-- modal -->
+            <div class="modal fade" id="userlevel{{user.0}}" tabindex="-1" role="dialog" aria-labelledby="userlevel{{user.0}}Title"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+            
+                            <div class="card bg-light">
+                                <article class="card-body mx-auto" style="max-width: 400px;">
+            
+                                    <form action="/admin/students/userlevelset" method="POST">
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                            </div>
+                                            <input name="mellicode" class="form-control" placeholder="کد ملی" type="text" value="{{user.0}}" readonly>
+                                        </div> <!-- form-group// -->
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                            </div>
+                                            <input class="form-control" placeholder="نام" type="text" value="{{user.1}}" readonly>
+                                        </div> <!-- form-group// -->
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                            </div>
+                                            <input class="form-control" placeholder="نام خانوادگی" type="text" value="{{user.2}}" readonly>
+                                        </div> <!-- form-group// -->
+            
+                                        <div class="form-group input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+                                            </div>
+            
+                                            <select class="form-control" name="level">
+                                                <option selected=""> سطح دانش آموز</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                                <option>5</option>
+                                                <option>6</option>
+                                                <option>7</option>
+                                                <option>8</option>
+                                                <option>9</option>
+                                                <option>10</option>
+                                                <option>11</option>
+                                                <option>12</option>
+                                            </select>
+                                        </div> <!-- form-group end.// -->
+            
+            
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block" formmethod="POST"> ثبت اطلاعات
+                                            </button>
+                                        </div> <!-- form-group// -->
+                                    </form>
+                                </article>
+                            </div> <!-- card.// -->
+            
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end modal  -->
             {% endfor %}
         </tbody>
     </table>
 </div>
+
 
 
 {% endblock content %}

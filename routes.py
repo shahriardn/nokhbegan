@@ -8,7 +8,7 @@ from model.admin import User
 from flask_login import LoginManager, login_user, login_required, logout_user
 app = Flask(__name__)
 
-# اطلاعات مورد نیاز برای پایگاه داده 
+# اطلاعات مورد نیاز برای پایگاه داده
 app.config['SECRET_KEY'] = 'anyrandomstring'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/shahriar/Projects/project-Meta/user.db'
 
@@ -20,9 +20,15 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-@app.route("/test")
+
+@app.route("/newuserregister", methods=['POST'])
 def test():
-    return render_template('/admin/test.html')
+    data = request.form.to_dict()
+    if show.adduser(data) == True:
+        return redirect('/')
+    else:
+        return render_template('/admin/test.html', context=data)
+
 
 @app.route("/")
 def home():
@@ -36,7 +42,7 @@ def user_loader(user_id):
 @app.route("/loginme", methods=['POST'])
 def loginme():
     data = request.form.to_dict()
-    if admin.loginme(data) == True :
+    if admin.loginme(data) == True:
         return redirect('/admin')
     else:
         return redirect('/login')
@@ -68,7 +74,16 @@ def home_admin():
 @login_required
 def studentshozoor():
     return admin.studenthozoor()
-
+# تعیین سطح یک دانش آموز
+@app.route("/admin/students/userlevelset", methods=["POST"])
+@login_required
+def userlevelset():
+    data = request.form.to_dict()
+    result = admin.userlevelset(data)
+    if result == True:
+        return redirect('/admin/students/level')
+    else:
+        return result
 
 # صفحه تعیین سطح دانش آموزان
 @app.route("/admin/students/level")
@@ -109,7 +124,7 @@ def deletedoreh(id):
 @app.route("/admin/doreh/updatedoreh/<id>", methods=['POST'])
 @login_required
 def updatedoreh(id):
-    
+
     data = {
         'condition': id,
         'newdata': request.form.to_dict()
@@ -119,6 +134,14 @@ def updatedoreh(id):
     else:
         return render_template('admin/test.html', content=data)
 
+
+@app.route("/admin/doreh/addusertodoreh", methods=['POST'])
+@login_required
+def addusertodoreh():
+    data = request.form.to_dict()
+    if admin.addusertodoreh(data) == True:
+        return redirect('/admin/doreh/dorehwaiting')
+    # return render_template('/admin/test.html', context=data)
 
 if __name__ == "__main__":
     app.run()
